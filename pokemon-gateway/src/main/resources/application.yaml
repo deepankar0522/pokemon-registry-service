@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: pokemon-app
+          uri: lb://POKEMON-APP
+          predicates:
+            - Path=/pokemon/**
+          filters:
+            - AuthenticationFilter
+
+        - id: pokemon-auth-service
+          uri: lb://POKEMON-AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+
+  application:
+    name: POKEMON-GATEWAY
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
