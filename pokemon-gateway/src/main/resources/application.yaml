@@ -1,23 +1,30 @@
+server:
+  port: 9191
+
 spring:
+  application:
+    name: pokemon-gateway-service
   cloud:
     gateway:
       routes:
-        - id: pokemon-app
-          uri: lb://POKEMON-APP
+        - id: pokemon-api
+          uri: lb://POKEMON-API
           predicates:
-            - Path=/pokemon/**
+            - Path=/api/**
           filters:
-            - AuthenticationFilter
-
-        - id: pokemon-auth-service
-          uri: lb://POKEMON-AUTH-SERVICE
+            - TokenAuthenticationFilter
+        - id: nomad-auth-service
+          uri: lb://NOMAD-AUTH-SERVICE
           predicates:
-            - Path=/auth/**
-
-  application:
-    name: POKEMON-GATEWAY
+            - Path=/signin
+            - Path=/signup
 
 eureka:
   client:
     service-url:
-      defaultZone : http://localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+jwt:
+  secret-key: 2D4A614E645267556B58703233357638792F413F4428472B4B6250655368566D

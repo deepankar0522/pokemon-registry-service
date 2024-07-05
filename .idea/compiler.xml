@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="pokemon-gateway" />
-        <module name="pokemon-auth-service" />
         <module name="pokemon-registry-service" />
         <module name="pokemon-api" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pokemon-auth-service" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
